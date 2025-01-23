@@ -4,7 +4,9 @@
 </script>
 
 <template>
+  <div class="bg-green-200">
     <RouterView></RouterView>
+  </div>
 </template>
 
 <style scoped>
