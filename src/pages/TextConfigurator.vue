@@ -36,6 +36,16 @@
 						<option v-for="x in FONTS" :value="x.family">{{ x.name }}</option>
 					</select>
 				</div>
+				<div>
+					<span class="block font-bold"><input type="checkbox" v-model="textSettings.shadow.active"/> Shadow</span>
+					<span v-if="!textSettings.shadow.active">None</span>
+					<div v-else>
+						<input type="color" v-model="textSettings.shadow.color">
+						<input type="number" v-model="textSettings.shadow.horizontalOffset" placeholder="horizontal offset">
+						<input type="number" v-model="textSettings.shadow.verticalOffset" placeholder="vertical offset">
+						<input type="number" v-model="textSettings.shadow.blurRadius" placeholder="Blur Radius">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -65,11 +75,18 @@ const textSettings = reactive({
 		color: 'red',
 		width: 2
 	},
+	shadow: {
+		active: false,
+		horizontalOffset: '3',
+		verticalOffset: '2',
+		blurRadius: '8',
+		color: "green"
+	},
 	family: "Roboto"
 });
 
 const textStyles = computed(() => {
-	const { stroke } = textSettings;
+	const { stroke, shadow } = textSettings;
 	const result = {
 		fontSize: textSettings.size + 'rem',
 		color: textSettings.color,
@@ -81,6 +98,10 @@ const textStyles = computed(() => {
 		result["-webkit-text-stroke"] = `${stroke.width}px ${stroke.color}`
 	}
 
+	if (shadow.active) {
+		result['text-shadow'] = `${shadow.horizontalOffset}px ${shadow.verticalOffset}px ${shadow.blurRadius}px ${shadow.color}`
+	}
+ 
 	return result;
 })
 
