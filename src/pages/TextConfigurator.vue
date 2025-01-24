@@ -29,9 +29,6 @@
 						<input type="color" v-model="textSettings.stroke.color">
 						<input type="number" v-model="textSettings.stroke.width">
 					</div>
-				</div><div>
-					<span class="block font-bold">Weight</span>
-					<input type="range" v-model="textSettings.weight" min="200" max="1000">
 				</div>
 				<div>
 					<span class="block font-bold">Font Family</span>
