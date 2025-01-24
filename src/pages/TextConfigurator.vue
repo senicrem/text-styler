@@ -12,35 +12,43 @@
 				</div>
 				<div>
 					<span class="block font-bold">Color</span>
-					<input type="color" v-model="textSettings.color">
+					<input type="color" class="w-full" v-model="textSettings.color">
 				</div>
 				<div>
 					<span class="block font-bold">Weight</span>
-					<input type="range" v-model="textSettings.weight" min="200" max="1000">
+					<input class="w-full" type="range" v-model="textSettings.weight" min="200" max="1000">
 				</div>
 				<div>
 					<span class="block font-bold"><input type="checkbox" v-model="textSettings.stroke.active"/> Stroke</span>
-					<span v-if="!textSettings.stroke.active">None</span>
+					<div class="w-full bg-gray-300 p-2 pl-4 text-sm flex" v-if="!textSettings.stroke.active">
+						<span>None</span>
+					</div>
 					<div v-else>
-						<input type="color" v-model="textSettings.stroke.color">
-						<input type="number" v-model="textSettings.stroke.width">
+						<input type="color" class="w-full" v-model="textSettings.stroke.color">
+						<input :class="styleInputText()" type="number" v-model="textSettings.stroke.width">
 					</div>
 				</div>
 				<div>
 					<span class="block font-bold">Font Family</span>
-					<select v-model="textSettings.family">
+					<select :class="styleInputText()" v-model="textSettings.family">
 						<option v-for="x in FONTS" :value="x.family">{{ x.name }}</option>
 					</select>
 				</div>
 				<div>
 					<span class="block font-bold"><input type="checkbox" v-model="textSettings.shadow.active"/> Shadow</span>
-					<span v-if="!textSettings.shadow.active">None</span>
-					<div v-else>
-						<input type="color" v-model="textSettings.shadow.color">
-						<input type="number" v-model="textSettings.shadow.horizontalOffset" placeholder="horizontal offset">
-						<input type="number" v-model="textSettings.shadow.verticalOffset" placeholder="vertical offset">
-						<input type="number" v-model="textSettings.shadow.blurRadius" placeholder="Blur Radius">
+					<div class="w-full bg-gray-300 p-2 pl-4 text-sm flex" v-if="!textSettings.shadow.active">
+						<span>None</span>
 					</div>
+					<div class="space-y-2" v-else>
+						<input type="color" class="w-full" v-model="textSettings.shadow.color">
+						<input :class="styleInputText()" type="number" v-model="textSettings.shadow.horizontalOffset" placeholder="horizontal offset">
+						<input :class="styleInputText()" type="number" v-model="textSettings.shadow.verticalOffset" placeholder="vertical offset">
+						<input :class="styleInputText()" type="number" v-model="textSettings.shadow.blurRadius" placeholder="Blur Radius">
+					</div>
+				</div>
+				<div>
+					<span class="block font-bold">Letter Spacing</span>
+					<input class="w-full" type="range" v-model="textSettings.letterSpacing" min="-50" max="50">
 				</div>
 			</div>
 			<div class="w-full flex items-center justify-center h-[24rem] h-full">
@@ -81,7 +89,8 @@ const textSettings = reactive({
 		blurRadius: '8',
 		color: "green"
 	},
-	family: "Roboto"
+	family: "Roboto",
+	letterSpacing: 0,
 });
 
 const textStyles = computed(() => {
@@ -90,7 +99,8 @@ const textStyles = computed(() => {
 		fontSize: textSettings.size + 'rem',
 		color: textSettings.color,
 		fontWeight: textSettings.weight,
-		fontFamily: `${textSettings.family}, serif`
+		fontFamily: `${textSettings.family}, serif`,
+		letterSpacing: `${textSettings.letterSpacing}px`
 	}
 	
 	if (stroke.active) {
@@ -104,7 +114,7 @@ const textStyles = computed(() => {
 	return result;
 })
 
-const styleInputText = () => ("bg-gray-200 text-sm px-3 py-2 border-0")
+const styleInputText = () => ("bg-gray-200 w-full text-sm px-3 py-2 border-0")
 
 </script>
 
