@@ -67,6 +67,12 @@
 						<option v-for="opt in TRANSFORM_OPTIONS" :value="opt" class="capitalize">{{ opt }}</option>
 					</select>
 				</div>
+				<div>
+					<span class="block font-bold">Decorations</span>
+					<select :class="styleInputText()" v-model="textSettings.decoration">
+						<option v-for="decor in DECORATION_OPTIONS" :value="decor" class="capitalize">{{ decor }}</option>
+					</select>
+				</div>
 			</div>
 			<div class="w-full flex items-center justify-center h-[24rem] h-full">
 				<p :style="textStyles" class="roboto">{{ textSettings.name }}</p>
@@ -97,6 +103,13 @@ const TRANSFORM_OPTIONS = [
 	'full-width'
 ]
 
+const DECORATION_OPTIONS = [
+	'none',
+	'underline',
+	'overline',
+	'line-through'
+]
+
 const textSettings = reactive({
 	name: "Hello World",
 	size: '5',
@@ -122,6 +135,7 @@ const textSettings = reactive({
 		color2: "#fe01e9"
 	},
 	transform: "none",
+	decoration: "none"
 });
 
 const textStyles = computed(() => {
@@ -132,7 +146,8 @@ const textStyles = computed(() => {
 		fontWeight: textSettings.weight,
 		fontFamily: `${textSettings.family}, serif`,
 		letterSpacing: `${textSettings.letterSpacing}px`,
-		textTransform: textSettings.transform
+		textTransform: textSettings.transform,
+		textDecoration: textSettings.decoration
 	}
 	
 	if (stroke.active) {
