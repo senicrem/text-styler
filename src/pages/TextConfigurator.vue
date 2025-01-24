@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-gray-200">
 		<div class="grid grid-cols-[300px_1fr] h-screen">
-			<div class="w-full bg-white py-10 px-5 flex gap-2 flex-col">
+			<div class="w-full bg-white py-10 px-5 flex gap-5 flex-col h-screen overflow-auto">
 				<div class="">
 					<span class="block font-bold">Name</span>
 					<input :class="styleInputText()" type="text" v-model.lazy="textSettings.name"  />
@@ -20,9 +20,14 @@
 						<span>None</span>
 					</div>
 					<div v-else>
-						<input type="color" class="w-full" v-model="textSettings.gradient.color1">
-						<input type="color" class="w-full" v-model="textSettings.gradient.color2">
-						
+						<div class="ml-4">
+							<span class="text-xs font-bold">Color 1</span>
+							<input type="color" class="w-full cursor-pointer" v-model="textSettings.gradient.color1">
+						</div>
+						<div class="ml-4">
+							<span class="text-xs font-bold">Color 2</span>
+							<input type="color" class="w-full cursor-pointer" v-model="textSettings.gradient.color2">
+						</div>
 					</div>
 				</div>
 				<div>
@@ -35,8 +40,14 @@
 						<span>None</span>
 					</div>
 					<div v-else>
-						<input type="color" class="w-full" v-model="textSettings.stroke.color">
-						<input :class="styleInputText()" type="number" v-model="textSettings.stroke.width">
+						<div class="ml-4">
+							<span class="text-xs font-bold">Color</span>
+							<input type="color" class="w-full cursor-pointer" v-model="textSettings.stroke.color">
+						</div>
+						<div class="ml-4">
+							<span class="text-xs font-bold">Width</span>
+							<input :class="styleInputText()" type="number" v-model="textSettings.stroke.width">
+						</div>
 					</div>
 				</div>
 				<div>
@@ -51,10 +62,22 @@
 						<span>None</span>
 					</div>
 					<div class="space-y-2" v-else>
-						<input type="color" class="w-full" v-model="textSettings.shadow.color">
-						<input :class="styleInputText()" type="number" v-model="textSettings.shadow.horizontalOffset" placeholder="horizontal offset">
-						<input :class="styleInputText()" type="number" v-model="textSettings.shadow.verticalOffset" placeholder="vertical offset">
-						<input :class="styleInputText()" type="number" v-model="textSettings.shadow.blurRadius" placeholder="Blur Radius">
+						<div class="ml-4">
+							<span class="text-xs font-bold">Color</span>
+							<input type="color" class="w-full cursor-pointer" v-model="textSettings.shadow.color">
+						</div>
+						<div class="ml-4">
+							<span class="text-xs font-bold">Horizontal Offset</span>
+							<input :class="styleInputText()" type="number" v-model="textSettings.shadow.horizontalOffset" placeholder="horizontal offset">
+						</div>
+						<div class="ml-4">
+							<span class="text-xs font-bold">Vertical Offset</span>
+							<input :class="styleInputText()" type="number" v-model="textSettings.shadow.verticalOffset" placeholder="vertical offset">
+						</div>
+						<div class="ml-4">
+							<span class="text-xs font-bold">Blur Radius</span>
+							<input :class="styleInputText()" type="number" v-model="textSettings.shadow.blurRadius" placeholder="Blur Radius">
+						</div>
 					</div>
 				</div>
 				<div>
