@@ -1,11 +1,7 @@
 <template>
-	<div class="h-screen bg-gray-200">
-		<div>
-			<div class="w-full flex items-center justify-center h-[24rem] overflow-x-auto">
-				<p :style="textStyles" class="roboto">{{ textSettings.name }}</p>
-			</div>
-	
-			<div class="w-full bg-white py-10 px-5 flex gap-2">
+	<div class="bg-gray-200">
+		<div class="grid grid-cols-[300px_1fr] h-screen">
+			<div class="w-full bg-white py-10 px-5 flex gap-2 flex-col">
 				<div class="">
 					<span class="block font-bold">Name</span>
 					<input :class="styleInputText()" type="text" v-model.lazy="textSettings.name"  />
@@ -46,6 +42,9 @@
 						<input type="number" v-model="textSettings.shadow.blurRadius" placeholder="Blur Radius">
 					</div>
 				</div>
+			</div>
+			<div class="w-full flex items-center justify-center h-[24rem] h-full">
+				<p :style="textStyles" class="roboto">{{ textSettings.name }}</p>
 			</div>
 		</div>
 	</div>
