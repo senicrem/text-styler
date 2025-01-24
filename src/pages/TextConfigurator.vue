@@ -61,6 +61,12 @@
 					<span class="block font-bold">Letter Spacing</span>
 					<input class="w-full" type="range" v-model="textSettings.letterSpacing" min="-50" max="50">
 				</div>
+				<div>
+					<span class="block font-bold">Transform</span>
+					<select :class="styleInputText()" v-model="textSettings.transform">
+						<option v-for="opt in TRANSFORM_OPTIONS" :value="opt" class="capitalize">{{ opt }}</option>
+					</select>
+				</div>
 			</div>
 			<div class="w-full flex items-center justify-center h-[24rem] h-full">
 				<p :style="textStyles" class="roboto">{{ textSettings.name }}</p>
@@ -81,6 +87,14 @@ const FONTS = [
 	{ name: "Oswald", family: "Oswald" },
 	{ name: "Merriweather", family: "Merriweather" },
 	{ name: "Playfair Display", family: "Playfair Display" },
+]
+
+const TRANSFORM_OPTIONS = [
+	'none',
+	'uppercase',
+	'lowercase',
+	'capitalize',
+	'full-width'
 ]
 
 const textSettings = reactive({
@@ -106,7 +120,8 @@ const textSettings = reactive({
 		active: false,
 		color1: "#0028f0",
 		color2: "#fe01e9"
-	}
+	},
+	transform: "none",
 });
 
 const textStyles = computed(() => {
@@ -116,7 +131,8 @@ const textStyles = computed(() => {
 		color: textSettings.color,
 		fontWeight: textSettings.weight,
 		fontFamily: `${textSettings.family}, serif`,
-		letterSpacing: `${textSettings.letterSpacing}px`
+		letterSpacing: `${textSettings.letterSpacing}px`,
+		textTransform: textSettings.transform
 	}
 	
 	if (stroke.active) {
