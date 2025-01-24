@@ -86,26 +86,26 @@ const FONTS = [
 const textSettings = reactive({
 	name: "Hello World",
 	size: '5',
-	color: 'black',
+	color: '#313131',
 	weight: '700',
 	stroke: {
 		active: false,
-		color: 'red',
+		color: '#4ef109',
 		width: 2
 	},
 	shadow: {
 		active: false,
-		horizontalOffset: '3',
-		verticalOffset: '2',
-		blurRadius: '8',
-		color: "green"
+		horizontalOffset: 5,
+		verticalOffset: 5,
+		blurRadius: 5,
+		color: "#44569c"
 	},
 	family: "Roboto",
 	letterSpacing: 0,
 	gradient: {
-		active: true,
-		color1: "blue",
-		color2: "red"
+		active: false,
+		color1: "#0028f0",
+		color2: "#fe01e9"
 	}
 });
 
@@ -130,7 +130,7 @@ const textStyles = computed(() => {
 	if (gradient.active) {
 		result['background'] = `linear-gradient(${gradient.color1}, ${gradient.color2})`
 		result['color'] = `transparent`
-		result['background-clip'] = `text`
+		result['background-clip'] = `text`	
 	}
  
 	return result;
