@@ -15,6 +15,17 @@
 					<input type="color" class="w-full" v-model="textSettings.color">
 				</div>
 				<div>
+					<span class="block font-bold"><input type="checkbox" v-model="textSettings.gradient.active"/> Gradient</span>
+					<div class="w-full bg-gray-300 p-2 pl-4 text-sm flex" v-if="!textSettings.gradient.active">
+						<span>None</span>
+					</div>
+					<div v-else>
+						<input type="color" class="w-full" v-model="textSettings.gradient.color1">
+						<input type="color" class="w-full" v-model="textSettings.gradient.color2">
+						
+					</div>
+				</div>
+				<div>
 					<span class="block font-bold">Weight</span>
 					<input class="w-full" type="range" v-model="textSettings.weight" min="200" max="1000">
 				</div>
@@ -91,10 +102,15 @@ const textSettings = reactive({
 	},
 	family: "Roboto",
 	letterSpacing: 0,
+	gradient: {
+		active: true,
+		color1: "blue",
+		color2: "red"
+	}
 });
 
 const textStyles = computed(() => {
-	const { stroke, shadow } = textSettings;
+	const { stroke, shadow, gradient } = textSettings;
 	const result = {
 		fontSize: textSettings.size + 'rem',
 		color: textSettings.color,
@@ -109,6 +125,12 @@ const textStyles = computed(() => {
 
 	if (shadow.active) {
 		result['text-shadow'] = `${shadow.horizontalOffset}px ${shadow.verticalOffset}px ${shadow.blurRadius}px ${shadow.color}`
+	}
+
+	if (gradient.active) {
+		result['background'] = `linear-gradient(${gradient.color1}, ${gradient.color2})`
+		result['color'] = `transparent`
+		result['background-clip'] = `text`
 	}
  
 	return result;
