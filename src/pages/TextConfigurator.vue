@@ -97,7 +97,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="w-full flex items-center justify-center h-[24rem] h-full">
+			<div class="w-full flex items-center justify-center h-full">
 				<p :style="textStyles" class="roboto">{{ textSettings.name }}</p>
 			</div>
 		</div>
